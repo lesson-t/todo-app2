@@ -1,0 +1,8 @@
+%h2 INDEX
+.container
+  - @boards.each do |board|
+    = render 'board', board: board
+  -# = render 'form', board: @board
+  = link_to new_board_path do
+    .float_btn
+      %i.fa.fa-plus

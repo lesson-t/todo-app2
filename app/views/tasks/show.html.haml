@@ -1,0 +1,20 @@
+%h2 SHOW
+.task
+  %h1.task_title= @task.title
+  .task_detail
+  .task_content
+    = @task.content
+    = @task.deadline
+    -# = image_tag @task.user.avatar_image
+    %div
+      %p= @task.author_name
+    - if user_signed_in? && current_user.has_written?(@task)
+      .task_detail_actions
+        .dropdown
+          = image_tag 'actions.svg', class: 'dropbtn'
+          .dropdown-content.mini
+            = link_to 'Edit', edit_board_path(@task)
+            = link_to 'Delete', board_path(@task), data: { method: 'delete', confirm: '本当に削除してもよろしいですか？' }
+          = link_to new_task_path do
+            .float_btn
+            %i.fa.fa-plus

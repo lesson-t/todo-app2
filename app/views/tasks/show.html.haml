@@ -1,0 +1,23 @@
+%h2 TASK SHOW
+.task
+  %h1.task_title= @task.title
+  .task_detail
+  - if @task.eyecatch.attached?
+    .task_image
+      = image_tag @task.eyecatch
+  .task_content
+    = @task.content
+    = @task.deadline
+    -# = image_tag @task.user.avatar_image
+    %div
+    -#   %p= @task.author_name
+    - if user_signed_in? #&& current_user.has_written?(@task)
+      .task_detail_actions
+        .dropdown
+          = image_tag 'actions.svg', class: 'dropbtn'
+          .dropdown-content.mini
+            = link_to 'Edit', edit_board_task_path(@task.board, @task.id)
+            = link_to 'Delete', board_task_path(@task.board, @task.id), data: { method: 'delete', confirm: '本当に削除してもよろしいですか？' }
+        -#   = link_to new_board_task_path(@board) do
+        -#     .float_btn
+        -#     %i.fa.fa-plus

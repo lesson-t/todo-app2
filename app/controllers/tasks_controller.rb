@@ -1,17 +1,20 @@
 class TasksController < ApplicationController
 
+
     def show
         @task = Task.find(params[:id])
     end
 
     def new
-        @task = current_user.tasks.build
+        board = Board.find(params[:board_id])
+        @task = board.tasks.build
     end
 
     def create
-        @task = current_user.tasks.build(board_params)
+        board = Board.find(params[:board_id])
+        @task = board.tasks.build(task_params)
         if @task.save
-            redirect_to task_path(@task), notice: '保存できました'
+            redirect_to board_task_path(@task.board, @task.id), notice: '保存できました'
         else
             flash.now[:error] = '保存に失敗しました'
             render :new
@@ -19,28 +22,32 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = current_user.tasks.find(params[:id])
+        board = Board.find(params[:board_id])
+        @task = board.tasks.find(params[:id])
+
     end
 
     def update
-        @task = current_user.tasks.find(params[:id])
+        board = Board.find(params[:board_id])
+        @task = board.tasks.find(params[:id])
         if @task.update(task_params)
-            redirect_to task_path(@task), notice: '更新できました'
+            redirect_to board_task_path(@task.board, @task.id), notice: '更新できました'
         else
-            flash.now[:error] = '更新に失敗しました'
+            flash.now[:error] = '更新できませんでした'
             render :edit
         end
     end
 
     def destroy
-        task = current_user.tasks.find(params[:id])
-        task.destroy!
-        redirect_to root_path, notice: '削除に成功しました' #タスクが追加されているボードに戻したい
+        board = Board.find(params[:board_id])
+        @task = board.tasks.find(params[:id])
+        @task.destroy!
+        redirect_to board_path(@task.board), notice: '削除に成功しました' #タスクが追加されているボードに戻したい未修整
     end
 
     private
     def task_params
-        params.require(:task).permit(:title, :content, :deadline)
+        params.require(:task).permit(:title, :content, :deadline, :eyecatch)
     end
 
     def set_task

@@ -8,7 +8,7 @@ class BoardsController < ApplicationController
 
     def show
         @board = Board.find(params[:id])
-        @task = Task.find(params[:id])
+        # @task = Task.find(params[:id])
     end
 
     def new
@@ -43,7 +43,7 @@ class BoardsController < ApplicationController
         board = current_user.boards.find(params[:id])
         board.destroy!
         redirect_to root_path, notice: '削除に成功しました'
-    
+
     end
 
     private

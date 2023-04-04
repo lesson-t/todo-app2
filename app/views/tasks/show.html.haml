@@ -21,3 +21,15 @@
         -#   = link_to new_board_task_path(@board) do
         -#     .float_btn
         -#     %i.fa.fa-plus
+
+.task
+  %h2 Comment
+  - @task.comments.each do |comment|
+    .task_comment
+      = image_tag 'default-avatar.png'
+      %p= comment.content
+
+.container
+  = link_to new_board_task_comment_path(@task.board, @task.id) do
+    .btn-secondary
+      + Add New Comment

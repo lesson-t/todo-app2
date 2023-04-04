@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
         task = Task.find(params[:task_id])
         @comment = task.comments.build(comment_params)
         if @comment.save
-            redirect_to board_task_path(task), notice: 'コメントを追加'
+            redirect_to board_task_path(task.board, task.id), notice: 'コメントを追加'
         else
             flash.now[:error] = '更新できませんでした'
             render :new

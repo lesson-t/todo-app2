@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
     def new
         task = Task.find(params[:task_id])
-        @comment = task.comment.build
+        @comment = task.comments.build
     end
 
     def create
         task = Task.find(params[:task_id])
-        @comment = task.comment.build(comment_params)
+        @comment = task.comments.build(comment_params)
         if @comment.save
             redirect_to board_task_path(task), notice: 'コメントを追加'
         else

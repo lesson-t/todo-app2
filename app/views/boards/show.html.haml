@@ -15,8 +15,9 @@
             = link_to 'Delete', board_path(@board), data: { method: 'delete', confirm: '本当に削除してもよろしいですか？' }
 
 .board
-  - @board.tasks.each do |task|
-    = render 'commons/task', task: task
+  -if @board.tasks.exists?
+    - @board.tasks.each do |task|
+      = render 'commons/task', task: task
 
 .container
   = link_to new_board_task_path(@board) do

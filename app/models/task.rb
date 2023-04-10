@@ -6,7 +6,7 @@ class Task < ApplicationRecord
     has_many :comments
     has_one_attached :eyecatch
 
-    # def author_name
-    #     user.display_name
-    # end
+    def author_name
+        user.display_name
+    end
 end

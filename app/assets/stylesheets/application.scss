@@ -7,7 +7,7 @@
 @import 'form';
 @import 'flash';
 @import 'common';
-// @import 'profile';
+@import 'profile';
 
 html {
   word-spacing: 1px;
@@ -17,6 +17,7 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   height: 100%;
+  font-family: 'Avenir','Helvetica Neue','Helvetica','Arial', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro','メイリオ', 'Meiryo', '游ゴシック', 'Yu Gothic', 'ＭＳ Ｐゴシック', sans-serif;
 }
 
 *,

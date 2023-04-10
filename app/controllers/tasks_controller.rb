@@ -42,7 +42,7 @@ class TasksController < ApplicationController
         board = Board.find(params[:board_id])
         @task = board.tasks.find(params[:id])
         @task.destroy!
-        redirect_to board_path(@task.board), notice: '削除に成功しました' #タスクが追加されているボードに戻したい未修整
+        redirect_to board_path(@task.board), notice: '削除に成功しました'
     end
 
     private
